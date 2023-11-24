@@ -7,8 +7,9 @@ using System.Windows.Media;
 namespace ColorMappingExample {
     class PriorityToColorConverter : MarkupExtension, IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (value is Priority val) {
-                switch (val) {
+            if (value is Priority) {
+                var priorityValue = (Priority)value;
+                switch (priorityValue) {
                     case Priority.High:
                     return Colors.Red;
 
