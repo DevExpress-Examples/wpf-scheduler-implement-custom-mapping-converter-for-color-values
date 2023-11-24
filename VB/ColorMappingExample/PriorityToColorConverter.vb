@@ -2,33 +2,38 @@ Imports System
 Imports System.Globalization
 Imports System.Windows.Data
 Imports System.Windows.Markup
+Imports System.Windows.Media
 
 Namespace ColorMappingExample
 
-#Region "#HtmlColorCodeToHexConverter"
-    Friend Class HtmlColorCodeToHexConverter
+    Friend Class PriorityToColorConverter
         Inherits MarkupExtension
         Implements IValueConverter
 
         Public Function Convert(ByVal value As Object, ByVal targetType As Type, ByVal parameter As Object, ByVal culture As CultureInfo) As Object Implements IValueConverter.Convert
-            If(value.GetType() Is GetType(String)) AndAlso value.ToString().StartsWith("#") Then
-                Return String.Concat("0x", value.ToString().Remove(0, 1))
-            Else
-                Return value
+            If TypeOf value Is Priority Then
+                Dim priorityValue = CType(value, Priority)
+                Select Case priorityValue
+                    Case Priority.High
+                        Return Colors.Red
+                    Case Priority.Normal
+                        Return Colors.Yellow
+                    Case Priority.Low
+                        Return Colors.Green
+                    Case Else
+                        Return Colors.Black
+                End Select
             End If
+
+            Return Colors.Transparent
         End Function
 
         Public Function ConvertBack(ByVal value As Object, ByVal targetType As Type, ByVal parameter As Object, ByVal culture As CultureInfo) As Object Implements IValueConverter.ConvertBack
-            If(value.GetType() Is GetType(String)) AndAlso value.ToString().StartsWith("0x") Then
-                Return String.Concat("#", value.ToString().Remove(0, 2))
-            Else
-                Return value
-            End If
+            Throw New NotImplementedException()
         End Function
 
         Public Overrides Function ProvideValue(ByVal serviceProvider As IServiceProvider) As Object
             Return Me
         End Function
     End Class
-#End Region  ' #HtmlColorCodeToHexConverter
 End Namespace

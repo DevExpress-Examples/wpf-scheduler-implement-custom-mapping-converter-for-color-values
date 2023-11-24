@@ -7,39 +7,24 @@
     xmlns:local="clr-namespace:ColorMappingExample"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:viewmodels="clr-namespace:ColorMappingExample.ViewModels"
     Height="600"
     Width="800"
     mc:Ignorable="d"
-    DataContext="{dxmvvm:ViewModelSource viewmodels:MainViewModel}"
     Title="MainWindow">
-    
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="480*" />
-        </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0">
-            <dxe:PopupColorEdit
-                Height="Auto"
-                Width="Auto"
-                Margin="10,10,10,10"
-                Color="{Binding ElementName = scheduler, Path= LabelItems[1].Color ,
-                                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock
-                Margin="10,10,10,10"
-                VerticalAlignment="Center"
-                Text= "{Binding Categories[1].ColorDataInfo}" />
-        </WrapPanel>
-        <dxsch:SchedulerControl x:Name="scheduler" Grid.Row="1">
+        <dxsch:SchedulerControl x:Name="scheduler">
             <dxsch:SchedulerControl.DataSource>
-                <dxsch:DataSource AppointmentLabelsSource="{Binding Categories}" AppointmentsSource="{Binding Appointments}">
+                <dxsch:DataSource AppointmentLabelsSource="{dxe:EnumItemsSource EnumType={x:Type local:Priority}}" 
+                                  AppointmentsSource="{Binding Appointments}">
                     <dxsch:DataSource.AppointmentMappings>
                         <dxsch:AppointmentMappings
                             AllDay="AllDay"
                             End="EndTime"
-                            LabelId="CategoryId"
+                            LabelId="PriorityId"
                             Location="Location"
                             RecurrenceInfo="RecurrenceInfo"
                             Reminder="ReminderInfo"
@@ -50,11 +35,10 @@
                     </dxsch:DataSource.AppointmentMappings>
                     <!--region #AppointmentLabelMappings-->
                     <dxsch:DataSource.AppointmentLabelMappings>
-                        <dxsch:AppointmentLabelMappings Color="{dxsch:Mapping FieldName=ColorData, 
-                            ConversionBehavior=BetweenFieldAndMapping, 
-                            Converter= {local:HtmlColorCodeToHexConverter}}"                            
-                            Caption="Caption"
-                            ColorSavingType="ColorString"
+                        <dxsch:AppointmentLabelMappings 
+                            Color="{dxsch:Mapping FieldName=Id, ConversionBehavior=BetweenFieldAndMapping, Converter={local:PriorityToColorConverter}}"                            
+                            Caption="Name"
+                            ColorSavingType="ColorInstance"
                             Id="Id" />
                     </dxsch:DataSource.AppointmentLabelMappings>
                     <!--endregion #AppointmentLabelMappings-->

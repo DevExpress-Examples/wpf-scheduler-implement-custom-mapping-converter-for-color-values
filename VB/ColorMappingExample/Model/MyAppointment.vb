@@ -1,21 +1,13 @@
-Imports DevExpress.Mvvm.POCO
-
 Namespace ColorMappingExample.Model
 
     Public Class MyAppointment
 
-        Public Shared Function Create() As MyAppointment
-            Return ViewModelSource.Create(Function() New MyAppointment())
-        End Function
-
-        Friend Shared Function Create(ByVal startTime As Date, ByVal endTime As Date, ByVal subject As String, ByVal categoryId As Integer) As MyAppointment
-            Dim apt As MyAppointment = Create()
-            apt.StartTime = startTime
-            apt.EndTime = endTime
-            apt.Subject = subject
-            apt.CategoryId = categoryId
-            Return apt
-        End Function
+        Public Sub New(ByVal startTime As Date, ByVal endTime As Date, ByVal subject As String, ByVal priorityId As Priority)
+            Me.StartTime = startTime
+            Me.EndTime = endTime
+            Me.Subject = subject
+            Me.PriorityId = priorityId
+        End Sub
 
         Protected Sub New()
         End Sub
@@ -32,7 +24,7 @@ Namespace ColorMappingExample.Model
 
         Public Overridable Property StatusId As Integer
 
-        Public Overridable Property CategoryId As Integer
+        Public Overridable Property PriorityId As Priority
 
         Public Overridable Property Type As Integer
 

@@ -9,4 +9,10 @@ Namespace ColorMappingExample
             Me.InitializeComponent()
         End Sub
     End Class
+
+    Public Enum Priority
+        High
+        Normal
+        Low
+    End Enum
 End Namespace
