@@ -6,4 +6,5 @@ namespace ColorMappingExample {
             InitializeComponent();
         }
     }
+    public enum Priority { High, Normal, Low }
 }

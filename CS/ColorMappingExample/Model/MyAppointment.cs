@@ -1,22 +1,12 @@
-﻿using DevExpress.Mvvm.POCO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace ColorMappingExample.Model {
     public class MyAppointment {
-        public static MyAppointment Create() {
-            return ViewModelSource.Create(() => new MyAppointment());
-        }
-        internal static MyAppointment Create(DateTime startTime, DateTime endTime, string subject, int categoryId) {
-            MyAppointment apt = MyAppointment.Create();
-            apt.StartTime = startTime;
-            apt.EndTime = endTime;
-            apt.Subject = subject;
-            apt.CategoryId = categoryId;
-            return apt;
+        public MyAppointment(DateTime startTime, DateTime endTime, string subject, Priority priorityId) {
+            StartTime = startTime;
+            EndTime = endTime;
+            Subject = subject;
+            PriorityId = priorityId;
         }
 
         protected MyAppointment() { }
@@ -26,7 +16,7 @@ namespace ColorMappingExample.Model {
         public virtual DateTime EndTime { get; set; }
         public virtual string Subject { get; set; }
         public virtual int StatusId { get; set; }
-        public virtual int CategoryId { get; set; }
+        public virtual Priority PriorityId { get; set; }
         public virtual int Type { get; set; }
         public virtual string Location { get; set; }
         public virtual string RecurrenceInfo { get; set; }
