@@ -22,7 +22,7 @@ This example implements a mapping converter for label colors. The **Priority** e
 * [Mapping Converters](https://docs.devexpress.com/WPF/119833/controls-and-libraries/scheduler/data-binding/mapping-converters)
 * [Mappings](https://docs.devexpress.com/WPF/119493/controls-and-libraries/scheduler/data-binding/mappings)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=wpf-scheduler-implement-custom-mapping-converter-for-color-values&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=wpf-scheduler-implement-custom-mapping-converter-for-color-values&~~~was_helpful=no)
 
